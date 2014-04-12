@@ -48,7 +48,7 @@ function cmdEncryptClick() {
 		txtPlaintext.value="";
         txtCiphertext.value = encryptedString(key, str);
         var t2 = new Date().getTime();
-        txtMessages.value = "Done. " + (t2 - t1) + " ms.";
+        txtMessages.value = "Done. " + (t2 - t1)/1000 + "s.";
     }
 }
 
@@ -60,7 +60,7 @@ function cmdVerifyClick() {
         var k = decryptedString(key, txtCiphertext.value);
 		txtVerification.value = deunicode(k);
         var t2 = new Date().getTime();
-        txtMessages.value = "Done. " + (t2 - t1) + " ms.";
+        txtMessages.value = "Done. " + (t2 - t1)/1000 + "s.";
     }
 }
 
