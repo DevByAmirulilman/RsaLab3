@@ -7,7 +7,6 @@
 var key;
 
 function createKey() {
-        setMaxDigits(130);
 		var s=window.location.search;
 		var k = s.split("?");
         key = new RSAKeyPair(k[1],k[2],k[3]);
@@ -15,14 +14,13 @@ function createKey() {
 
 function bodyLoad() {
     createKey();
-	loadXMLDoc();
 }
 
 function cmdShowKeyClick() {
     var m = biToString(key.m, key.radix);
     var e = biToString(key.e, key.radix);
     var d = biToString(key.d, key.radix);
-    document.frm.txtMessages.value = "Key:\n" + "m = " + m + "\n" + "e = " + e + "\n" + "d = " + d;
+    document.frm.txtMessages.value = "Key:\n" + "m = " + m + "; \n" + "e = " + e + "; \n" + "d = " + d + ";";
 }
 
 function unicode(tstr) {
@@ -44,55 +42,22 @@ function cmdEncryptClick() {
     with(document.frm) {
         txtMessages.value = "Encrypting. Please wait...";
         var t1 = new Date().getTime();
-		var str = unicode(txtPlaintext.value);
-		txtPlaintext.value="";
-        txtCiphertext.value = encryptedString(key, str);
+		var str = unicode(txt.value);
+        txt.value = encryptedString(key, str);
         var t2 = new Date().getTime();
         txtMessages.value = "Done. " + (t2 - t1)/1000 + " seconds.";
     }
 }
 
-function cmdVerifyClick() {
+function cmdDecryptClick() {
     with(document.frm) {
         txtMessages.value = "Decrypting. Please wait...";
-        txtVerification.value = "";
         var t1 = new Date().getTime();
-        var k = decryptedString(key, txtCiphertext.value);
-		txtVerification.value = deunicode(k);
+        var k = decryptedString(key, txt.value);
+		txt.value = deunicode(k);
         var t2 = new Date().getTime();
         txtMessages.value = "Done. " + (t2 - t1)/1000 + " seconds.";
     }
-}
-
-function loadXMLDoc()
-{
-var xmlhttp;
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-	var k=xmlhttp.responseText;
-	var l=k.split("\r\n");
-	for(var i=0;i<l.length;i++){
-	console.log(l);
-	var m=l[i].split(":");
-	console.log(m.length);
-	if(m.length>1){
-    document.getElementById("t").innerHTML+=m[0]+": <input type=\"text\" value=\""+m[1]+"\"><br>";
-	}
-	}
-    }
-  }
-xmlhttp.open("GET","log.txt",true);
-xmlhttp.send();
 }
 </script>
 </head>
@@ -113,26 +78,15 @@ Demo: <a href="http://g2384.github.io/js-RSA/?12e9a5?dc12d?216a45">http://g2384.
 <form name="frm">
 <input type="button" value="Show Key" name="cmdShowKey" onclick="cmdShowKeyClick()">
 <div style="padding-top:10px">
-<div>Plaintext</div>
-<textarea rows="3" style="width:100%;" name="txtPlaintext">Test, 中文</textarea>
+<div>Text</div>
+<textarea rows="3" style="width:100%;" name="txt">Test, 中文</textarea>
 <div align="right">
 <input type="button" value="Encrypt" name="cmdEncrypt" onclick="cmdEncryptClick()">
+<input type="button" value="Decrypt" name="cmdDecrypt" onclick="cmdDecryptClick()">
 </div>
 </div>
 <div style="padding-top:10px">
-<div>Ciphertext</div>
-<textarea rows="3" style="width:100%" name="txtCiphertext"></textarea>
-<div align="right">
-<input type="button" value="Verify" name="cmdVerify" onclick="cmdVerifyClick()">
-</div>
-</div>
-<div style="padding-top:10px">
-<div>Verification</div>
-<textarea rows="3" style="width:100%" name="txtVerification" readonly=""></textarea>
-</div>
-<div style="padding-top:10px">
-<div>Messages</div>
-<textarea rows="3" style="width:100%" name="txtMessages" readonly=""></textarea>
+<div>Status: <input name="txtMessages" style="border:0px;width:100%" value="Hello world!"></div>
 </div>
 </form>
 </body></html>
