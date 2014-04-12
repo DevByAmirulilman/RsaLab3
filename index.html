@@ -7,8 +7,9 @@
 var key;
 
 function createKey() {
-		var s=window.location.search;
-		var k = s.split("?");
+	setMaxDigits(130);
+	var s=window.location.search;
+	var k = s.split("?");
         key = new RSAKeyPair(k[1],k[2],k[3]);
 }
 
