@@ -42,7 +42,7 @@ function cmdEncryptClick() {
     with(document.frm) {
         txtMessages.value = "Encrypting. Please wait...";
         var t1 = new Date().getTime();
-		var str = unicode(txt.value);
+	var str = unicode(txt.value);
         txt.value = encryptedString(key, str);
         var t2 = new Date().getTime();
         txtMessages.value = "Done. " + (t2 - t1)/1000 + " seconds.";
@@ -54,7 +54,7 @@ function cmdDecryptClick() {
         txtMessages.value = "Decrypting. Please wait...";
         var t1 = new Date().getTime();
         var k = decryptedString(key, txt.value);
-		txt.value = deunicode(k);
+	txt.value = deunicode(k);
         var t2 = new Date().getTime();
         txtMessages.value = "Done. " + (t2 - t1)/1000 + " seconds.";
     }
