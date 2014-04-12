@@ -99,6 +99,8 @@ xmlhttp.send();
 <body onload="bodyLoad()">
 Discription:<br>
 1. read keys from the url<br>
+e.g. http://g2384.github.io/js-RSA/<span style="color:#3366CC">?12e9a5?dc12d?216a45</span><br>
+converts to:<br>
 <pre>
 // key length = 24 bits
 key = new RSAKeyPair(
@@ -107,7 +109,7 @@ key = new RSAKeyPair(
  "216a45"
 );</pre>
 2. unicode() function to support all characters<br><br>
-<a href="http://g2384.github.io/js-RSA/?12e9a5?dc12d?216a45">Demo: http://g2384.github.io/js-RSA/?12e9a5?dc12d?216a45</a>
+Demo: <a href="http://g2384.github.io/js-RSA/?12e9a5?dc12d?216a45">http://g2384.github.io/js-RSA/?12e9a5?dc12d?216a45</a>
 <div id="t"></div>
 <form name="frm">
 <input type="button" value="Show Key" name="cmdShowKey" onclick="cmdShowKeyClick()">
