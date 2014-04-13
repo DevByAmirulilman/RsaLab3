@@ -12,5 +12,6 @@ key = new RSAKeyPair(<br />
 );</code>
 
 - unicode() function to support all characters
+- OR you could modify to let it read from cookie, it is safer
 
 Demo: http://g2384.github.io/js-RSA/?12e9a5?dc12d?216a45
